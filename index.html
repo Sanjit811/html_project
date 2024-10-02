@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operations</title>
+</head>
+<body>
+    <h1>CRUD Operations</h1>
+
+    <div id="output"></div>
+
+    <input type="text" id="inputField">
+    <button onclick="create()">Create</button>
+    <button onclick="read()">Read</button>
+    <button onclick="update()">Update</button>
+    <button onclick="remove()">Delete</button>
+
+    <script>
+        let data = []; // Sample data storage, could be replaced with a database or other storage mechanism
+
+        function create() {
+            const inputValue = document.getElementById("inputField").value;
+            if (inputValue) {
+                data.push(inputValue);
+                document.getElementById("inputField").value = "";
+                displayData();
+            }
+        }
+
+        function read() {
+            displayData();
+        }
+
+        function update() {
+            const index = prompt("Enter index to update:");
+            const newValue = prompt("Enter new value:");
+            if (index && newValue && index >= 0 && index < data.length) {
+                data[index] = newValue;
+                displayData();
+            } else {
+                alert("Invalid input!");
+            }
+        }
+
+        function remove() {
+            const index = prompt("Enter index to delete:");
+            if (index && index >= 0 && index < data.length) {
+                data.splice(index, 1);
+                displayData();
+            } else {
+                alert("Invalid input!");
+            }
+        }
+
+        function displayData() {
+            const outputDiv = document.getElementById("output");
+            outputDiv.innerHTML = "<h2>Data:</h2>";
+            data.forEach((item, index) => {
+                outputDiv.innerHTML += `<p>${index}: ${item}</p>`;
+            });
+        }
+    </script>
+</body>
+</html>
